@@ -18,34 +18,30 @@ document.querySelector("form").addEventListener("submit", (event) => {
     .then((response) => recipeDisplay(response.results))
     .catch((err) => console.error(err));
 });
+// double recursion
 
+//to make recipe to display
 function recipeDisplay(recipe) {
   console.log(recipe);
   const mainArticle = document.getElementById("main_article");
 
+  //making recipe cards and styling it
   recipe.forEach((element) => {
     const card = document.createElement("div");
     card.setAttribute("class", "card");
     card.style.width = "35rem";
     card.style.backgroundColor = "orange";
 
+    // creating title header and content"name of recipe"
     const title = document.createElement("h2");
-
     title.textContent =
       element.slug.charAt(0).toUpperCase() +
       element.slug.slice(1).split("-").join(" ");
 
+    // making the image for the front
     const imageFront = document.createElement("img");
     imageFront.setAttribute("class", "front-card-image card-image");
-
     imageFront.setAttribute("src", element.thumbnail_url);
-
-    const imageBack = document.createElement("img");
-    imageBack.setAttribute("class", "back-card-image");
-    // imageBack.setAttribute("src", element.original_video_url);
-    li.innerHTML = `<a id="${element.original_video_url}" href="#"`
-    imageBack.append(li)
-    //add href anchor tag
 
     const front = document.createElement("div");
     front.setAttribute("class", "card-front");
@@ -59,8 +55,32 @@ function recipeDisplay(recipe) {
     const infoBackArea = document.createElement("section");
     infoBackArea.setAttribute("class", "card-info");
 
+    //for the video
+    if (
+      element.original_video_url !== undefined &&
+      element.original_video_url !== null
+    ) {
+      const videoBack = document.createElement("video");
+      videoBack.setAttribute("class", "back-card-video");
+      videoBack.src = `${element.original_video_url}`;
+      // to play and pause on click
+      videoBack.addEventListener("click", () => {
+        if (videoBack.paused) videoBack.play();
+        else videoBack.pause();
+      });
+      videoBack.style.height = "350px";
+      videoBack.style.width = "350px";
+
+      const videoBackTitle = document.createElement("h3");
+      videoBackTitle.innerText = "Click Video to play/pause";
+
+      videoBack.prepend(videoBackTitle);
+      back.prepend(videoBack);
+    }
+
+//for getting ingredient and put it in a list
     if (element.instructions) {
-      //write function for getting ingredient and
+      
       element.sections.forEach((el) => {
         const ul = document.createElement("ul");
 
@@ -72,6 +92,7 @@ function recipeDisplay(recipe) {
         infoFrontArea.append(ul);
       });
 
+// making instructions
       element.instructions.forEach((el) => {
         const infoBack = document.createElement("p");
         infoBackArea.append(infoBack);
@@ -83,7 +104,7 @@ function recipeDisplay(recipe) {
 
     card.append(front, back);
     front.append(title, imageFront, infoFrontArea);
-    back.append(imageBack, infoBackArea);
+    back.append(infoBackArea);
     mainArticle.append(card);
   });
 }

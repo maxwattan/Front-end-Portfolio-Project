@@ -1,10 +1,11 @@
 /* add padding  */
-
+/* @media all  */
 .header {
     background-color: turquoise;
     grid-area: header;
     text-align: center;
 }
+
 
 body {
    
@@ -15,9 +16,10 @@ body {
     width: 100vw;
     min-height: 100vh;
     height: fit-content;
+    text-align: center;
 }
 
-#main_article {
+#main_article :hover {
     padding: 20px;
 }
 
@@ -26,7 +28,7 @@ body {
     border-radius: 30px;
 }
 
-.flip-card {
+/* .flip-card {
     background-color: transparent;
     width: 300px;
     height: 300px;
@@ -64,6 +66,6 @@ body {
     background-color: #2980b9;
     color: white;
     transform: rotateY(180deg);
-  }
+  } */
 
 
