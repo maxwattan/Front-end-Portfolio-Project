@@ -108,3 +108,5 @@ function recipeDisplay(recipe) {
     mainArticle.append(card);
   });
 }
+
+// window.alert("sometext");

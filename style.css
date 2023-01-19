@@ -1,5 +1,6 @@
 /* add padding  */
-/* @media all  */
+
+
 .header {
     background-color: turquoise;
     grid-area: header;
@@ -8,7 +9,7 @@
 
 
 body {
-   
+  
 }
 
 .main {
@@ -28,6 +29,13 @@ body {
     border-radius: 30px;
 }
 
+@media screen and (max-width: 600px) {
+    .header {
+        background-color: blue;
+        grid-area: header;
+        text-align: center;
+    }
+}
 /* .flip-card {
     background-color: transparent;
     width: 300px;
@@ -67,5 +75,3 @@ body {
     color: white;
     transform: rotateY(180deg);
   } */
-
-
